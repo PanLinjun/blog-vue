@@ -1,0 +1,22 @@
+html {
+  height: 100%;
+  font-size: 14px;
+}
+
+body {
+  height: 100%;
+  background: #F7F7F7;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
