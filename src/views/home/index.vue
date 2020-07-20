@@ -95,6 +95,7 @@
           const {
             data
           } = response.data
+          console.log(data)
           this.articleInfo.categoryCount.value = data.length
         })
       },
@@ -113,16 +114,15 @@
 <style lang="scss" scoped>
   .home-container {
     height: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 
     .info-container {
       display: inline-block;
-      margin: 150px 0;
       background-color: #ffffff;
-      min-height: 420px;
-      min-width: 640px;
-      /*height: 45%;*/
-      /*width: 50%;*/
+      margin: 10% 0;
+      height: 420px;
+      width: 640px;
       border-radius: 2px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
       transition: all 1s cubic-bezier(.25,.8,.25,1);

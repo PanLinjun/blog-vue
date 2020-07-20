@@ -1,5 +1,5 @@
 <template>
-  <div class="app-main">
+  <div class="app-main-container">
     <keep-alive>
       <router-view/>
     </keep-alive>
@@ -8,12 +8,13 @@
 
 <script>
 export default {
-  name: 'AppMain',
+  name: 'AppMain'
 }
 </script>
 
 <style lang="scss" scoped>
-  .app-main {
-    height: 500px;
+  .app-main-container {
+    height: 100%;
+    padding: 0 15%;
   }
 </style>

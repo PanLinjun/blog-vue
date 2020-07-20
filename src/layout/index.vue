@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <top-bar/>
     <app-main/>
   </div>
@@ -9,7 +9,7 @@
   import TopBar from './components/TopBar'
   import AppMain from './components/AppMain'
   export default {
-    name: "Layout",
+    name: 'Layout',
     components: {
       TopBar,
       AppMain
@@ -17,6 +17,8 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .layout {
+    height: 100%;
+  }
 </style>
