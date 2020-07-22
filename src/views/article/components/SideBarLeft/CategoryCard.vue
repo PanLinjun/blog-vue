@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <div v-for="item in categoryList" :key="item.label" class="content-item">
-        <span class="item-label">{{item.label}}</span>
+        <span class="item-label" @click="handelFilter(item.label)">{{item.label}}</span>
         <span>{{item.total}}</span>
       </div>
     </div>
@@ -17,9 +17,11 @@
 
   export default {
     name: 'CategoryCard',
+    inject: ['reload'],
     data() {
       return {
-        categoryList: {}
+        categoryList: {},
+        listQuery: {}
       }
     },
     mounted() {
@@ -30,9 +32,18 @@
         getCategory().then(response => {
           const {
             data
-          } = response.data
+          } = response
           this.categoryList = data
         })
+      },
+      handelFilter(category) {
+        console.log(category)
+        this.listQuery.category = category
+        this.$router.push({
+          path: '/article',
+          query: this.listQuery
+        }).catch(() => {})
+        this.reload()
       }
     }
   }
@@ -40,7 +51,6 @@
 
 <style lang="scss" scoped>
   .card {
-    width: 250px;
     padding: 10px 0;
     background-color: #ffffff;
     border: 1px solid #ffffff;

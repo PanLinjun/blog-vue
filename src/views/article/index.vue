@@ -1,8 +1,8 @@
 <template>
   <div class="article-page">
-    <side-bar-left/>
-    <list/>
-    <side-bar-right/>
+    <side-bar-left class="sidebar"/>
+    <list class="list"/>
+    <side-bar-right class="sidebar"/>
   </div>
 </template>
 
@@ -25,5 +25,13 @@
   .article-page {
     display: flex;
     justify-content: space-between;
+
+    .sidebar {
+      width: 250px;
+    }
+
+    .list {
+      width: 800px;
+    }
   }
 </style>

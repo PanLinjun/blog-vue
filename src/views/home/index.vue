@@ -85,7 +85,7 @@
           const {
             data,
             total
-          } = response.data
+          } = response
           this.list = data
           this.articleInfo.articleCount.value = total
         })
@@ -94,7 +94,7 @@
         getCategory().then(response => {
           const {
             data
-          } = response.data
+          } = response
           console.log(data)
           this.articleInfo.categoryCount.value = data.length
         })
@@ -103,7 +103,7 @@
         listTag().then(response => {
           const {
             data
-          } = response.data
+          } = response
           this.articleInfo.tagCount.value = data.length
         })
       }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sidebar">
     SideBarRight
   </div>
 </template>
@@ -10,6 +10,8 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .sidebar {
+    display: inline-block;
+  }
 </style>

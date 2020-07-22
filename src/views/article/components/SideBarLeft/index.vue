@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <category-card/>
-    <tag-card/>
+  <div class="container">
+    <category-card class="card"/>
+    <tag-card class="card"/>
   </div>
 </template>
 
@@ -18,6 +18,8 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .card {
+    margin: 0 0 20px;
+  }
 </style>

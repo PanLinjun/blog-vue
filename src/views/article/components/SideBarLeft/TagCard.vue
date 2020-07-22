@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <div v-for="item in tagList" :key="item.label" class="content-item">
-        <span class="item-label">{{item.label}}</span>
+        <span class="item-label" @click="handelFilter(item.label)">{{item.label}}</span>
         <span>{{item.total}}</span>
       </div>
     </div>
@@ -17,9 +17,11 @@
 
   export default {
     name: 'TagCard',
+    inject: ['reload'],
     data() {
       return {
-        tagList: {}
+        tagList: {},
+        listQuery: {}
       }
     },
     mounted() {
@@ -30,10 +32,17 @@
         listTag().then(response => {
           const {
             data
-          } = response.data
+          } = response
           this.tagList = data
-          console.log(data)
         })
+      },
+      handelFilter(tag) {
+        this.listQuery.tag = tag
+        this.$router.push({
+          path: '/article',
+          query: this.listQuery
+        }).catch(() => {})
+        this.reload()
       }
     }
   }

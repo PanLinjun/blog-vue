@@ -17,7 +17,7 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getAdmin(state.username).then(response => {
-        const { data } = response.data
+        const { data } = response
         if (!data) {
           reject('Verification failed, please Login again.')
         }
