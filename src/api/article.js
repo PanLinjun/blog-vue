@@ -16,16 +16,18 @@ export function getArticle(id) {
 	})
 }
 
-export function getCategory() {
+export function getCategory(state) {
 	return request({
 		url: '/article/category',
-		method: 'get'
+		method: 'get',
+		params: { state }
 	})
 }
 
-export function listTag() {
+export function listTag(state) {
 	return request({
 		url: '/article/listTag',
-		method: 'get'
+		method: 'get',
+		params: { state }
 	})
 }

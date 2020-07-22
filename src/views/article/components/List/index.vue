@@ -8,7 +8,9 @@
         <div class="content-wrapper">
             <span class="text">{{item.createDate}}</span>
             <span class="text">{{item.category}}</span>
-            <h1>{{item.title}}</h1>
+            <router-link :to="{path: '/content', query: {id: item.id}}">
+              <h1>{{item.title}}</h1>
+            </router-link>
             <div class="tag-wrapper">
               <div v-for="tagItem in item.tag" :key="tagItem" class="tag-item">
                 <span>{{tagItem}}</span>
@@ -27,7 +29,9 @@
     name: 'List',
     data() {
       return {
-        listQuery: {},
+        listQuery: {
+          state: '已发布'
+        },
         list: {}
       }
     },
@@ -58,7 +62,6 @@
     overflow: hidden;
     height: 350px;
     margin: 0 0 10px;
-    border: 1px solid #FFFFFF;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 
     .img-wrapper {

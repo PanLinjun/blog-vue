@@ -29,7 +29,8 @@
     },
     methods: {
       getCategoryList() {
-        getCategory().then(response => {
+        const state = '已发布'
+        getCategory(state).then(response => {
           const {
             data
           } = response

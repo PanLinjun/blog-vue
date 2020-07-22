@@ -29,7 +29,8 @@
     },
     methods: {
       getTagList() {
-        listTag().then(response => {
+        const state = '已发布'
+        listTag(state).then(response => {
           const {
             data
           } = response

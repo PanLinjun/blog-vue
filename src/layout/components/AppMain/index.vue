@@ -15,6 +15,5 @@ export default {
 <style lang="scss" scoped>
   .app-main-container {
     height: 100%;
-    padding: 0 15%;
   }
 </style>

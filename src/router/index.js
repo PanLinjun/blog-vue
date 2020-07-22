@@ -22,6 +22,10 @@ const constantRoutes = [
       {
         path: 'about',
         component: () => import('@/views/about/index')
+      },
+      {
+        path: 'content',
+        component: () => import('@/views/content/index')
       }
     ]
   },
