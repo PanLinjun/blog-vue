@@ -1,12 +1,17 @@
 <template>
   <div class="sidebar">
-    SideBarRight
+    <hot-article-card class="card"/>
   </div>
 </template>
 
 <script>
+  import HotArticleCard from './HotArticleCard'
+
   export default {
-    name: 'SideBarRight'
+    name: 'SideBarRight',
+    components: {
+      HotArticleCard
+    }
   }
 </script>
 

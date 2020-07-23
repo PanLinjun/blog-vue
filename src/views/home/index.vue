@@ -95,7 +95,6 @@
           const {
             data
           } = response
-          console.log(data)
           this.articleInfo.categoryCount.value = data.length
         })
       },

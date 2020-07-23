@@ -19,20 +19,27 @@
         </div>
       </div>
     </div>
+    <pagination v-if="list.length !== 0" :pageSize="listQuery.pageSize" :page="listQuery.page" :listLength="list.length"/>
   </div>
 </template>
 
 <script>
   import { listArticle } from '@/api/article'
+  import Pagination from '@/components/Pagination'
 
   export default {
     name: 'List',
+    components: {
+      Pagination
+    },
     data() {
       return {
         listQuery: {
-          state: '已发布'
+          state: '已发布',
+          page: 1,
+          pageSize: 2
         },
-        list: {}
+        list: []
       }
     },
     mounted() {
@@ -44,13 +51,15 @@
         listQuery = Object.assign(this.listQuery, this.$route.query)
         listArticle(listQuery).then(response => {
           const {
-            data
+            data,
+            page
           } = response
           this.list = data
           this.list = this.list.map(article => {
             article.tag = article.tag.split(',')
             return article
           })
+          this.listQuery.page = page
         })
       }
     }

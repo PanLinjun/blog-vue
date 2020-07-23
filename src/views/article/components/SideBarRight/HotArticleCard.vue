@@ -1,44 +1,45 @@
 <template>
-  <div v-if="tagList.length !== 0" class="card">
+  <div v-if="categoryList.length !== 0" class="card">
     <div class="title">
-      <span>标签</span>
+      <span>热门文章</span>
     </div>
     <div class="content">
-      <div v-for="item in tagList" :key="item.label" class="content-item">
+      <div v-for="item in categoryList" :key="item.label" class="content-item">
         <span class="item-label" @click="handelFilter(item.label)">{{item.label}}</span>
-        <span class="item-total">{{item.total}}</span>
+        <span>{{item.total}}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { listTag } from '@/api/article'
+  import { getCategory } from '@/api/article'
 
   export default {
-    name: 'TagCard',
+    name: 'CategoryCard',
     inject: ['reload'],
     data() {
       return {
-        tagList: [],
+        categoryList: [],
         listQuery: {}
       }
     },
     mounted() {
-      this.getTagList()
+      this.getCategoryList()
     },
     methods: {
-      getTagList() {
+      getCategoryList() {
         const state = '已发布'
-        listTag(state).then(response => {
+        getCategory(state).then(response => {
           const {
             data
           } = response
-          this.tagList = data
+          this.categoryList = data
         })
       },
-      handelFilter(tag) {
-        this.listQuery.tag = tag
+      handelFilter(category) {
+        console.log(category)
+        this.listQuery.category = category
         this.$router.push({
           path: '/article',
           query: this.listQuery
@@ -51,7 +52,6 @@
 
 <style lang="scss" scoped>
   .card {
-    width: 250px;
     padding: 10px 0;
     background-color: #ffffff;
     border: 1px solid #ffffff;
@@ -65,31 +65,14 @@
 
     .content {
       margin: 0 40px;
-      display: flex;
-      flex-wrap: wrap;
 
       .content-item {
         display: flex;
-        align-items: center;
-        margin: 0 10px 10px 0;
-        background-color: #f5f5f5;
-        border: 1px solid #FFFFFF;
-        border-radius: 5px;
+        justify-content: space-between;
+        padding: 10px 0;
 
-        .item-label {
-          margin: 0 10px 0;
-        }
         .item-label:hover {
           cursor: pointer;
-        }
-        .item-total {
-          height: 20px;
-          width: 20px;
-          background-color: #e7e7e7;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 0 5px 5px 0;
         }
       }
     }

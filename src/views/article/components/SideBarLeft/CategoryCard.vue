@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div v-if="categoryList.length !== 0" class="card">
     <div class="title">
       <span>分类</span>
     </div>
@@ -20,7 +20,7 @@
     inject: ['reload'],
     data() {
       return {
-        categoryList: {},
+        categoryList: [],
         listQuery: {}
       }
     },
@@ -35,10 +35,10 @@
             data
           } = response
           this.categoryList = data
+          console.log(this.categoryList)
         })
       },
       handelFilter(category) {
-        console.log(category)
         this.listQuery.category = category
         this.$router.push({
           path: '/article',

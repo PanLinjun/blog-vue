@@ -1,20 +1,23 @@
 <template>
   <div class="top-bar-container">
     <div class="icon-container">
-      Icon
+      <svg-icon icon-class="search"/>
     </div>
     <div class="nav-bar-container">
       <router-link to="/home" class="nav-bar-item">
         Home
       </router-link>
-      <router-link to="/article" class="nav-bar-item">
+      <div @click="handelRefresh" class="nav-bar-item">
         Articles
+      </div>
+      <router-link to="/comment" class="nav-bar-item">
+        Comment
       </router-link>
       <router-link to="/link" class="nav-bar-item">
         Links
       </router-link>
       <router-link to="/about" class="nav-bar-item">
-        about
+        About
       </router-link>
     </div>
   </div>
@@ -22,7 +25,16 @@
 
 <script>
   export default {
-    name: 'TopBar'
+    name: 'TopBar',
+    inject: ['reload'],
+    methods: {
+      handelRefresh() {
+        this.$router.push({
+          path: '/article'
+        }).catch(() => {})
+        this.reload()
+      }
+    }
   }
 </script>
 
@@ -51,6 +63,7 @@
 
       &:hover {
         color: #0a76a4;
+        cursor: pointer;
       }
     }
   }
