@@ -17,14 +17,21 @@
     <div class="content-wrapper">
       <span v-html="article.content"></span>
     </div>
+    <div class="content-wrapper">
+      <comment/>
+    </div>
   </div>
 </template>
 
 <script>
   import { getArticle } from '@/api/article'
+  import Comment from './components/comment'
 
   export default {
     name: 'Content',
+    components: {
+      Comment
+    },
     data() {
       return {
         article: {}
