@@ -17,6 +17,7 @@
     <div class="content-wrapper">
       <span v-html="article.content"></span>
     </div>
+
     <div class="content-wrapper">
       <comment/>
     </div>
@@ -25,7 +26,7 @@
 
 <script>
   import { getArticle } from '@/api/article'
-  import Comment from './components/comment'
+  import Comment from '@/components/Comment'
 
   export default {
     name: 'Content',
@@ -47,7 +48,6 @@
           const { data } = response
           this.article = data
           this.article.tag = this.article.tag.split(',')
-          console.log(this.article)
         })
       }
     }

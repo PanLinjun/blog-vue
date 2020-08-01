@@ -26,10 +26,6 @@ const constantRoutes = [
       {
         path: 'content',
         component: () => import('@/views/content/index')
-      },
-      {
-        path: 'comment',
-          component: () => import('@/views/comment/index')
       }
     ]
   },
