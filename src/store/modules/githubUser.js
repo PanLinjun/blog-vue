@@ -1,10 +1,10 @@
 import { githubLogin, githubGetInfo } from '@/api/githubLogin'
-import { setToken } from '@/utils/auth'
+import { getToken, setToken } from '@/utils/auth'
 
 const state = {
   name: '',
   avatar: '',
-  token: ''
+  token: getToken()
 }
 
 const mutations = {
@@ -38,9 +38,11 @@ const actions = {
     return new Promise((resolve, reject) => {
       githubGetInfo(data).then(response => {
         const { data } = response
-        const { name, avatar } = data
+        const { name, avatar_url } = data
         commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
+        commit('SET_AVATAR', avatar_url)
+        sessionStorage.setItem('name', name)
+        sessionStorage.setItem('avatar_url', avatar_url)
         resolve()
       }).catch(error => {
         reject(error)
