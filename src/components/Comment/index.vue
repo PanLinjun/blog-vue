@@ -37,7 +37,6 @@
         listComment().then(response => {
           const { data } = response
           this.commentList = data
-          console.log(this.commentList)
         })
       },
       handleComment() {
