@@ -20,7 +20,7 @@ import calcTextareaHeight from '@/utils/calcTextareaHeight'
 import { clientID, clientSecret } from '@/settings'
 import store from '@/store'
 import { addComment } from '@/api/comment'
-import { getToken } from '@/utils/auth'
+import { getRefreshToken } from '@/utils/auth'
 
 export default {
   name: 'InputItem',
@@ -28,9 +28,8 @@ export default {
   props: ['commentInfo'],
   data() {
     return {
-      githubUsername: sessionStorage.getItem('name'),
-      githubUserAvatar: sessionStorage.getItem('avatar_url'),
-      token: getToken(),
+      githubUsername: localStorage.getItem('name'),
+      githubUserAvatar: localStorage.getItem('avatar_url'),
       inputContent: null,
       postForm: {
         pid: '',
@@ -40,22 +39,23 @@ export default {
         content: '',
         like_num: 0
       },
-      height: 30
+      height: 30,
+      token: getRefreshToken()
     }
   },
   mounted() {
-    const hasToken = getToken()
-    if (this.$route.query.code && !hasToken) {
+    const hasRefreshToken = getRefreshToken()
+    if (this.$route.query.code && !hasRefreshToken) {
       const requestToken = this.$route.query.code
       const accessData = {
         client_id: clientID,
         client_secret: clientSecret,
         code: requestToken
       }
-      if (!hasToken) {
+      if (!hasRefreshToken) {
         console.log('login')
-        store.dispatch('githubUser/login', accessData).then(token => {
-          store.dispatch('githubUser/getInfo', token).then(() => {
+        store.dispatch('githubUser/login', accessData).then(() => {
+          store.dispatch('githubUser/getInfo').then(() => {
             this.reload()
           })
         })

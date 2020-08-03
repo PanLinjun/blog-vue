@@ -3,12 +3,18 @@
     <keep-alive>
       <router-view :key="$route.fullPath"/>
     </keep-alive>
+    <top-item/>
   </div>
 </template>
 
 <script>
+import TopItem from '@/components/TopItem'
+
 export default {
-  name: 'AppMain'
+  name: 'AppMain',
+  components: {
+    TopItem
+  }
 }
 </script>
 

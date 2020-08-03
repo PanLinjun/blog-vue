@@ -8,6 +8,7 @@
 <script>
   import TopBar from './components/TopBar'
   import AppMain from './components/AppMain'
+
   export default {
     name: 'Layout',
     components: {

@@ -4,8 +4,7 @@ export function githubLogin(data) {
   return request({
     url: '/github/login',
     method: 'post',
-    data: data,
-    timeout: 1000 * 60
+    data: data
   })
 }
 
@@ -13,5 +12,13 @@ export function githubGetInfo() {
   return request({
     url: '/github/getInfo',
     method: 'get'
+  })
+}
+
+export function refreshToken(data) {
+  return request({
+    url: '/github/refreshToken',
+    method: 'post',
+    data: data
   })
 }

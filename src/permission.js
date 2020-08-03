@@ -1,14 +1,29 @@
 import router from './router'
-import store from './store'
-import { getToken } from '@/utils/auth' // get token from cookie
+import { getRefreshToken, getAccessToken, setAccessToken, setRefreshToken } from '@/utils/auth' // get token from cookie
+import { refreshToken } from '@/api/githubLogin'
+import { clientID, clientSecret } from '@/settings'
 
 router.beforeEach(async(to, from, next) => {
-  const hasToken = getToken()
-  const githubName = sessionStorage.getItem('name')
-  if (hasToken && !githubName) {
-    console.log('getInfo')
-    store.dispatch('githubUser/getInfo', hasToken)
-    next()
+  const hasRefreshToken = getRefreshToken()
+  if (!hasRefreshToken) {
+    console.log('clear loginInfo')
+    localStorage.removeItem('name')
+    localStorage.removeItem('avatar_url')
+  } else {
+    const hasAccessToken = getAccessToken()
+    if (!hasAccessToken) {
+      console.log('refresh token')
+      const accessData = {
+        client_id: clientID,
+        client_secret: clientSecret
+      }
+      refreshToken(accessData).then(response => {
+        console.log(response)
+        const { data } = response
+        setAccessToken(data.access_token)
+        setRefreshToken(data.refresh_token)
+      })
+    }
   }
   next()
 })

@@ -1,15 +1,28 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'Github-Token'
+var access_expireTime = new Date(new Date().getTime() + 6 * 60 * 60 * 1000)
+var refresh_expireTime = new Date(new Date().getTime() + 60 * 24 * 60 * 60 * 1000)
 
-export function getToken() {
-  return Cookies.get(TokenKey)
+const AccessTokenKey = 'Github-Access-Token'
+const RefreshTokenKey = 'Github-Refresh-Token'
+
+export function getAccessToken() {
+  return Cookies.get(AccessTokenKey)
 }
 
-export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+export function getRefreshToken() {
+  return Cookies.get(RefreshTokenKey)
+}
+
+export function setAccessToken(token) {
+  return Cookies.set(AccessTokenKey, token, { expires: access_expireTime })
+}
+
+export function setRefreshToken(token) {
+  return Cookies.set(RefreshTokenKey, token, { expires: refresh_expireTime })
 }
 
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+  Cookies.remove(getAccessToken)
+  Cookies.remove(RefreshTokenKey)
 }
