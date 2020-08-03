@@ -22,7 +22,7 @@ export function setRefreshToken(token) {
   return Cookies.set(RefreshTokenKey, token, { expires: refresh_expireTime })
 }
 
-export function removeToken() {
-  Cookies.remove(getAccessToken)
+export function removeAllToken() {
+  Cookies.remove(AccessTokenKey)
   Cookies.remove(RefreshTokenKey)
 }

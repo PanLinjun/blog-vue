@@ -1,9 +1,10 @@
 import request from '@/utils/request'
 
-export function listComment() {
+export function listComment(owner_id) {
   return request({
     url: '/comment/list',
-    method: 'get'
+    method: 'get',
+    params: { owner_id: owner_id }
   })
 }
 

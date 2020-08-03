@@ -4,16 +4,19 @@
       <router-view :key="$route.fullPath"/>
     </keep-alive>
     <top-item/>
+    <logout-button/>
   </div>
 </template>
 
 <script>
 import TopItem from '@/components/TopItem'
+import LogoutButton from '@/components/LogoutButton'
 
 export default {
   name: 'AppMain',
   components: {
-    TopItem
+    TopItem,
+    LogoutButton
   }
 }
 </script>

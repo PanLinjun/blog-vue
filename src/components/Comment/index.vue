@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import { listComment, addComment } from '@/api/comment'
+  import { listComment } from '@/api/comment'
   import CommentItem from '@/components/Comment/CommentItem'
   import InputItem from '@/components/Comment/InputItem'
 
@@ -34,14 +34,11 @@
     },
     methods: {
       listComment() {
-        listComment().then(response => {
+        const owner_id = this.$route.query.id
+        console.log(owner_id)
+        listComment(owner_id).then(response => {
           const { data } = response
           this.commentList = data
-        })
-      },
-      handleComment() {
-        addComment(this.postForm).then(response => {
-          console.log('评论成功')
         })
       }
     }

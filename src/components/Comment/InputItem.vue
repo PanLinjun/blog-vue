@@ -33,6 +33,7 @@ export default {
       inputContent: null,
       postForm: {
         pid: '',
+        from_avatar: localStorage.getItem('avatar_url'),
         owner_id: '',
         from_id: '',
         to_id: '',
@@ -47,6 +48,10 @@ export default {
     const hasRefreshToken = getRefreshToken()
     if (this.$route.query.code && !hasRefreshToken) {
       const requestToken = this.$route.query.code
+
+      const newQuery = JSON.parse(JSON.stringify(this.$route.query)) // 深拷贝
+      delete newQuery.code
+
       const accessData = {
         client_id: clientID,
         client_secret: clientSecret,
@@ -56,7 +61,11 @@ export default {
         console.log('login')
         store.dispatch('githubUser/login', accessData).then(() => {
           store.dispatch('githubUser/getInfo').then(() => {
-            this.reload()
+            this.$router.push({
+              path: this.$route.path,
+              query: newQuery
+            })
+            this.reload() // 刷新logoutButton
           })
         })
       }

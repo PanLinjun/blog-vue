@@ -25,5 +25,6 @@ router.beforeEach(async(to, from, next) => {
       })
     }
   }
+  scrollTo(0, 0)
   next()
 })
