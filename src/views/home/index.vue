@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="info-container">
       <div class="avatar-wrapper">
-        <img :src="'/api' + '/img/' + avatar" alt="avatar" class="avatar">
+        <img :src="admin_avatar" alt="avatar" class="avatar">
       </div>
       <h1>Pan Linjun</h1>
       <p class="skills-tag-wrapper">
@@ -39,17 +39,14 @@
 
 <script>
   import { listArticle, getCategory, listTag } from '@/api/article'
-  import { mapGetters } from 'vuex'
+  import { admin_avatar } from '@/settings'
 
   export default {
     name: 'Home',
-    components: {
-    },
     computed: {
-      ...mapGetters([
-        'username',
-        'avatar'
-      ])
+      admin_avatar() {
+        return admin_avatar
+      }
     },
     created() {
       this.$store.dispatch('admin/getInfo')

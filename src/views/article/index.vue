@@ -25,14 +25,16 @@
   .article-page {
     display: flex;
     justify-content: space-between;
-    padding: 0 15%;
+    padding: 0 10%;
 
     .sidebar {
-      width: 250px;
+      width: 30%;
+      min-width: 250px;
     }
 
     .list {
-      width: 800px;
+      margin: 0 20px;
+      min-width: 450px;
     }
   }
 </style>

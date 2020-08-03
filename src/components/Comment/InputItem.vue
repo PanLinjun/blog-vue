@@ -98,7 +98,6 @@ export default {
     handleComment() {
       this.setData()
       addComment(this.postForm).then(response => {
-        console.log(response)
         this.reload()
       })
     }

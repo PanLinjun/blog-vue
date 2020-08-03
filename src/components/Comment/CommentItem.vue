@@ -6,8 +6,10 @@
     <div class="content">
       <div class="top">
         {{commentInfo.from_id}}
+        <span v-if="from_id === 'PanLinjun'">(博主)</span>
       </div>
       <div class="mid">
+        <span v-if="to_id">回复 {{to_id}}:</span>
         {{commentInfo.content}}
       </div>
       <div class="bottom">
@@ -15,7 +17,6 @@
           {{commentInfo.create_time}}
         </div>
         <div class="bottom-right">
-<!--          <svg-icon icon-class="good" class="icon-good" @click="handleGood"></svg-icon>-->
           <div class="icon-response" @click="handleActive">
             <svg-icon icon-class="response" ref="responseButton"></svg-icon>
             回复
@@ -42,7 +43,9 @@ export default {
   data() {
     return {
       responseActive: false,
-      inputContent: false
+      inputContent: false,
+      from_id: this.commentInfo.from_id,
+      to_id: this.commentInfo.to_id
     }
   },
   mounted() {

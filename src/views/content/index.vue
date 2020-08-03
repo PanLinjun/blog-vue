@@ -55,6 +55,10 @@
 </script>
 
 <style lang="scss" scoped>
+
+  .content-wrapper {
+    margin: 0 0 30px 0;
+  }
   .container {
     height: 100%;
   }

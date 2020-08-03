@@ -35,7 +35,6 @@
     methods: {
       listComment() {
         const owner_id = this.$route.query.id
-        console.log(owner_id)
         listComment(owner_id).then(response => {
           const { data } = response
           this.commentList = data

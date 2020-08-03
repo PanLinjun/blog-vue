@@ -9,11 +9,13 @@
             <span class="text">{{item.createDate}}</span>
             <span class="text">{{item.category}}</span>
             <router-link :to="{path: '/content', query: {id: item.id}}">
-              <h1>{{item.title}}</h1>
+              <h1 @click="handleClick(item)">{{item.title}}</h1>
             </router-link>
-            <div class="tag-wrapper">
-              <div v-for="tagItem in item.tag" :key="tagItem" class="tag-item">
-                <span>{{tagItem}}</span>
+            <div class="bottom">
+              <div class="tag-wrapper">
+                <div v-for="tagItem in item.tag" :key="tagItem" class="tag-item">
+                  <span>{{tagItem}}</span>
+                </div>
               </div>
             </div>
         </div>
@@ -24,7 +26,7 @@
 </template>
 
 <script>
-  import { listArticle } from '@/api/article'
+  import { listArticle, updateArticle } from '@/api/article'
   import Pagination from '@/components/Pagination'
 
   export default {
@@ -61,12 +63,17 @@
           })
           this.listQuery.page = page
         })
+      },
+      handleClick(item) {
+        item.click++
+        updateArticle(item)
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+
   .list-item {
     overflow: hidden;
     height: 350px;
@@ -92,6 +99,9 @@
         .tag-item {
           display: inline-block;
           margin: 0 10px 0 0;
+          padding: 0 10px;
+          border: 1px solid #2b2f3a;
+          border-radius: 10px;
         }
       }
     }

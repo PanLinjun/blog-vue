@@ -1,50 +1,42 @@
 <template>
-  <div v-if="categoryList.length !== 0" class="card">
+  <div v-if="hotArticleList.length !== 0" class="card">
     <div class="title">
       <span>热门文章</span>
     </div>
     <div class="content">
-      <div v-for="item in categoryList" :key="item.label" class="content-item">
-        <span class="item-label" @click="handelFilter(item.label)">{{item.label}}</span>
-        <span>{{item.total}}</span>
+      <div v-for="item in hotArticleList" :key="item.id" class="content-item">
+        <router-link :to="{path: '/content', query: {id: item.id}}">
+          <span @click="handleClick(item)">{{item.title}}</span>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { getCategory } from '@/api/article'
+  import { listArticle } from '@/api/article'
 
   export default {
     name: 'CategoryCard',
     inject: ['reload'],
     data() {
       return {
-        categoryList: [],
+        hotArticleList: [],
         listQuery: {}
       }
     },
     mounted() {
-      this.getCategoryList()
+      this.listHotArticle()
     },
     methods: {
-      getCategoryList() {
-        const state = '已发布'
-        getCategory(state).then(response => {
-          const {
-            data
-          } = response
-          this.categoryList = data
+      listHotArticle() {
+        const sort = {
+          sort: '-click'
+        }
+        listArticle(sort).then(response => {
+          const { data } = response
+          this.hotArticleList = data
         })
-      },
-      handelFilter(category) {
-        console.log(category)
-        this.listQuery.category = category
-        this.$router.push({
-          path: '/article',
-          query: this.listQuery
-        }).catch(() => {})
-        this.reload()
       }
     }
   }

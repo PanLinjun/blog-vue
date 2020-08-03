@@ -16,6 +16,14 @@ export function getArticle(id) {
 	})
 }
 
+export function updateArticle(data) {
+	return request({
+		url: '/article/updateArticle',
+		method: 'post',
+		data
+	})
+}
+
 export function getCategory(state) {
 	return request({
 		url: '/article/category',

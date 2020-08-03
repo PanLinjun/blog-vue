@@ -42,7 +42,7 @@
   .top-bar-container {
     height: 30px;
     margin: 0 0 2rem;
-    padding: 10px 15%;
+    padding: 10px 10%;
     background-color: #FFFFFF;
     border-radius: 2px;
     border-bottom: 1px solid rgba(30,35,42,.06);
