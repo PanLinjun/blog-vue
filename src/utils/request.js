@@ -1,16 +1,16 @@
 import axios from 'axios'
 
-var baseURL = ''
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://119.45.62.78:3001'
-}
-
-if (process.env.NODE_ENV === 'production') {
-  baseURL = 'http://119.45.62.78:3001'
-}
+// var baseURL = ''
+// if (process.env.NODE_ENV === 'development') {
+//   baseURL = 'http://119.45.62.78:3001'
+// }
+//
+// if (process.env.NODE_ENV === 'production') {
+//   baseURL = 'http://119.45.62.78:3001'
+// }
 
 const service = axios.create({
-  baseURL: baseURL,
+  baseURL: '/aaa',
   timeout: 5000
 })
 
