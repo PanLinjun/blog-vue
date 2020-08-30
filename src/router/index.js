@@ -36,7 +36,7 @@ const constantRoutes = [
 ]
 
 const createRouter = () => new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes: constantRoutes
 })
 
