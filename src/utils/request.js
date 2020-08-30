@@ -10,7 +10,7 @@ import axios from 'axios'
 // }
 
 const service = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://119.45.62.78:3001',
   timeout: 5000
 })
 
