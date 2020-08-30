@@ -1,6 +1,10 @@
 import axios from 'axios'
 
-var baseURL = '/api'
+var baseURL = ''
+if (process.env.NODE_ENV === 'development') {
+  baseURL = '/api'
+}
+
 if (process.env.NODE_ENV === 'production') {
   baseURL = 'http://119.45.62.78:3001/'
 }
