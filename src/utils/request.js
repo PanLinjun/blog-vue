@@ -10,7 +10,7 @@ import axios from 'axios'
 // }
 
 const service = axios.create({
-  baseURL: 'http://119.45.62.78:3001/asdasdasd',
+  baseURL: '',
   timeout: 5000
 })
 
