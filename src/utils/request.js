@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const service = axios.create({
-  baseURL,
+  baseURL: baseURL,
   timeout: 5000
 })
 
