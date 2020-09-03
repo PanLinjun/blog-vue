@@ -16,10 +16,6 @@ const constantRoutes = [
         component: () => import('@/views/article/index')
       },
       {
-        path: 'link',
-        component: () => import('@/views/link/index')
-      },
-      {
         path: 'about',
         component: () => import('@/views/about/index')
       },

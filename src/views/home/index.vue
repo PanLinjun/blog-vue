@@ -29,7 +29,7 @@
         <a href="https://github.com/PanLinjun" target="_blank">
           <svg-icon icon-class="github" class="icon-github icon-item"></svg-icon>
         </a>
-        <a href="mailto:panlinjun1996@gmail.com">
+        <a href="mailto:panlinjun.work@outlook.com">
           <svg-icon icon-class="email" class="icon-email icon-item"></svg-icon>
         </a>
       </div>

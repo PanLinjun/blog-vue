@@ -10,7 +10,7 @@
       </div>
       <div class="mid">
         <span v-if="to_id">回复 {{to_id}}:</span>
-        {{commentInfo.content}}
+        <span style="word-break: break-all">{{commentInfo.content}}</span>
       </div>
       <div class="bottom">
         <div class="time">
@@ -124,6 +124,7 @@ export default {
 
     .mid {
       margin: 0 0 5px;
+      width: 90%;
     }
 
     .bottom {

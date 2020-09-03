@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <pagination v-if="list.length !== 0" :pageSize="listQuery.pageSize" :page="listQuery.page" :listLength="list.length"/>
+    <pagination v-if="list.length !== 0" :pageSize="listQuery.pageSize" :page="listQuery.page" :listLength="list.length" :total="list.total"/>
   </div>
 </template>
 
@@ -54,7 +54,8 @@
         listArticle(listQuery).then(response => {
           const {
             data,
-            page
+            page,
+            total
           } = response
           this.list = data
           this.list = this.list.map(article => {
@@ -62,6 +63,7 @@
             return article
           })
           this.listQuery.page = page
+          this.list.total = total
         })
       },
       handleClick(item) {

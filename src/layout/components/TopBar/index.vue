@@ -10,12 +10,6 @@
       <div @click="handelRefresh" class="nav-bar-item">
         Articles
       </div>
-      <router-link to="/comment" class="nav-bar-item">
-        Comment
-      </router-link>
-      <router-link to="/link" class="nav-bar-item">
-        Links
-      </router-link>
       <router-link to="/about" class="nav-bar-item">
         About
       </router-link>

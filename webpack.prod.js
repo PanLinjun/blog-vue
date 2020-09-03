@@ -9,6 +9,7 @@ const NODE_ENV = process.env.NODE_ENV
 console.log("--------"+NODE_ENV+"-----------")
 
 module.exports = {
+  mode: NODE_ENV,
   target: 'web',
   entry: './src/main.js',
   output: {

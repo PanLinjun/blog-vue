@@ -7,7 +7,7 @@
       </label>
     </div>
     <div class="bottom">
-      <button class="button" @click="handleComment">评论</button>
+      <button class="button" @click="handleComment" id="commentButton">评论</button>
     </div>
   </div>
   <div v-else class="container">
@@ -21,6 +21,7 @@ import { clientID, clientSecret } from '@/settings'
 import store from '@/store'
 import { addComment } from '@/api/comment'
 import { getRefreshToken } from '@/utils/auth'
+import { redirect_url } from '@/constant'
 
 export default {
   name: 'InputItem',
@@ -93,12 +94,17 @@ export default {
       const id = this.$route.query.id
       window.location.href = 'https://github.com/login/oauth/authorize?' +
           `client_id=${clientID}&` +
-          `redirect_uri=http://localhost:8080/content?id=${id}`
+          `redirect_uri=` + redirect_url + `/content?id=${id}`
     },
     handleComment() {
-      this.setData()
+      if (this.inputContent) {
+        this.setData()
+      }
       addComment(this.postForm).then(response => {
-        this.reload()
+        const { code } = response
+        if (code === 0) {
+          this.inputContent = null
+        }
       })
     }
   }
@@ -114,7 +120,6 @@ export default {
     padding: 0 5%;
   }
   textarea {
-    //max-width: 90%;
     width: 98%;
     height: 30px;
     line-height: 30px;

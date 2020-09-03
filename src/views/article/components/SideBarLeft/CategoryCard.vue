@@ -35,7 +35,6 @@
             data
           } = response
           this.categoryList = data
-          console.log(this.categoryList)
         })
       },
       handelFilter(category) {

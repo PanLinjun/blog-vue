@@ -28,7 +28,7 @@
     padding: 0 10%;
 
     .sidebar {
-      width: 30%;
+      width: 250px;
       min-width: 250px;
     }
 
