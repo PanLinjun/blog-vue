@@ -27,30 +27,40 @@ const actions = {
   login({ commit }, data) {
     return new Promise((resolve, reject) => {
         githubLogin(data).then(response => {
-          console.log(response)
-          const { data } = response
-          commit('SET_ACCESS_TOKEN', data.access_token)
-          commit('SET_REFRESH_TOKEN', data.refresh_token)
-          setAccessToken(data.access_token)
-          setRefreshToken(data.refresh_token)
-          resolve()
+          if (response.code === 0) {
+            console.log('获取Token成功')
+            const { data } = response
+            commit('SET_ACCESS_TOKEN', data.access_token)
+            commit('SET_REFRESH_TOKEN', data.refresh_token)
+            setAccessToken(data.access_token)
+            setRefreshToken(data.refresh_token)
+            resolve()
+          }
         }).catch(error => {
+          console.log('登录超时')
           reject(error)
         })
     })
   },
 
   getInfo({ commit }) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject, error) => {
       githubGetInfo().then(response => {
-        const { data } = response
-        const { login, avatar_url } = data
-        commit('SET_NAME', login)
-        commit('SET_AVATAR', avatar_url)
-        localStorage.setItem('name', login)
-        localStorage.setItem('avatar_url', avatar_url)
+        console.log(response)
+        if (response.error === 500) {
+          console.log('获取用户信息超时')
+          reject(error)
+        } else {
+          const { data } = response
+          const { login, avatar_url } = data
+          commit('SET_NAME', login)
+          commit('SET_AVATAR', avatar_url)
+          localStorage.setItem('name', login)
+          localStorage.setItem('avatar_url', avatar_url)
+        }
         resolve()
       }).catch(error => {
+        console.log('获取用户信息超时')
         reject(error)
       })
     })

@@ -22,6 +22,7 @@ import store from '@/store'
 import { addComment } from '@/api/comment'
 import { getRefreshToken } from '@/utils/auth'
 import { redirect_url } from '@/constant'
+import { githubLogout } from '@/api/githubLogin'
 
 export default {
   name: 'InputItem',
@@ -43,33 +44,6 @@ export default {
       },
       height: 30,
       token: getRefreshToken()
-    }
-  },
-  mounted() {
-    const hasRefreshToken = getRefreshToken()
-    if (this.$route.query.code && !hasRefreshToken) {
-      const requestToken = this.$route.query.code
-
-      const newQuery = JSON.parse(JSON.stringify(this.$route.query)) // 深拷贝
-      delete newQuery.code
-
-      const accessData = {
-        client_id: clientID,
-        client_secret: clientSecret,
-        code: requestToken
-      }
-      if (!hasRefreshToken) {
-        console.log('login')
-        store.dispatch('githubUser/login', accessData).then(() => {
-          store.dispatch('githubUser/getInfo').then(() => {
-            this.$router.push({
-              path: this.$route.path,
-              query: newQuery
-            })
-            this.reload() // 刷新logoutButton
-          })
-        })
-      }
     }
   },
   watch: {
@@ -104,6 +78,7 @@ export default {
         const { code } = response
         if (code === 0) {
           this.inputContent = null
+          this.$store.dispatch('comment/refreshComment')
         }
       })
     }

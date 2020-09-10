@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const service = axios.create({
   baseURL: baseURL,
-  timeout: 20000
+  timeout: 5000
 })
 
 service.interceptors.response.use(

@@ -1,11 +1,13 @@
 import request from '@/utils/request'
 import { removeAllToken } from '@/utils/auth'
+import router from "../router";
 
 export function githubLogin(data) {
   return request({
     url: '/github/login',
     method: 'post',
-    data: data
+    data: data,
+    timeout: 10000
   })
 }
 
@@ -21,7 +23,8 @@ export function githubLogout() {
 export function githubGetInfo() {
   return request({
     url: '/github/getInfo',
-    method: 'get'
+    method: 'get',
+    timeout: 10000
   })
 }
 
@@ -30,5 +33,12 @@ export function refreshToken(data) {
     url: '/github/refreshToken',
     method: 'post',
     data: data
+  })
+}
+
+export function refreshPageNoCode(router, to, newQuery) {
+  router.push({
+    path: to.path,
+    query: newQuery
   })
 }

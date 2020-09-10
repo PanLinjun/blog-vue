@@ -1,6 +1,6 @@
 <template>
-  <div id="commentContainer" class="container" @click="handleClick">
-    <input-item />
+  <div id="commentContainer" class="container">
+    <input-item/>
     <div class="comment-wrapper">
       <comment-item v-for="item in commentList" :key="item.id" :commentInfo="item"/>
     </div>
@@ -12,12 +12,16 @@
   import CommentItem from '@/components/Comment/CommentItem'
   import InputItem from '@/components/Comment/InputItem'
   import throttle from '@/utils/throttle'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'Comment',
     components: {
       CommentItem,
       InputItem
+    },
+    computed: {
+      ...mapGetters(['refreshComment'])
     },
     data() {
       return {
@@ -36,6 +40,12 @@
         total: 0
       }
     },
+    watch: {
+      refreshComment: function () {
+        this.params.page = 1
+        this.listComment()
+      }
+    },
     mounted() {
       this.listComment()
     },
@@ -46,18 +56,11 @@
           const { data, total } = response
           if (data) {
             this.commentList = data
-            console.log(data)
             this.total = total
             this.params.page++
             this.scrollRefreshComment()
           }
         })
-      },
-      handleClick(e) {
-        if (e.target.id === 'commentButton') {
-          this.params.page = 1
-          this.listComment()
-        }
       },
       scrollRefreshComment() {
         const cp = this
@@ -70,7 +73,7 @@
             }
           })
         }
-        const throttleListComment = throttle(fn, 300)
+        const throttleListComment = throttle(fn, 500)
 
         window.onscroll = function () {
           const scrollTop = document.documentElement.scrollTop
