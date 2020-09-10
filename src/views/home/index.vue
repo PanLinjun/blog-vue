@@ -23,7 +23,7 @@
         </div>
       </div>
       <router-link to="/article" class="button-wrapper">
-        <button class="button-item">Enter the blog</button>
+        <button class="button-item">Click here</button>
       </router-link>
       <div class="icon-wrapper">
         <a href="https://github.com/PanLinjun" target="_blank">
