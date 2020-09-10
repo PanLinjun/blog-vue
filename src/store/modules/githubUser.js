@@ -46,7 +46,6 @@ const actions = {
   getInfo({ commit }) {
     return new Promise((resolve, reject, error) => {
       githubGetInfo().then(response => {
-        console.log(response)
         if (response.error === 500) {
           console.log('获取用户信息超时')
           reject(error)

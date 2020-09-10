@@ -51,11 +51,13 @@ router.beforeEach(async(to, from, next) => {
         })
       })
     }
-    store.dispatch('githubUser/getInfo').catch( error => {
-      if (error) {
-        githubLogout()
-      }
-    })
+    if (!localStorage.getItem('name')) {
+      store.dispatch('githubUser/getInfo').catch( error => {
+        if (error) {
+          githubLogout()
+        }
+      })
+    }
   }
   scrollTo(0, 0)
   next()
