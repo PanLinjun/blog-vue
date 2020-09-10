@@ -5,7 +5,8 @@ const state = {
   name: '',
   avatar: '',
   access_token: getAccessToken(),
-  refresh_token: getRefreshToken()
+  refresh_token: getRefreshToken(),
+  loading: false
 }
 
 const mutations = {
@@ -20,32 +21,43 @@ const mutations = {
   },
   SET_REFRESH_TOKEN: (state, token) => {
     state.refresh_token = token
+  },
+  OPEN_LOADING: (state) => {
+    state.loading = true
+  },
+  CLOSE_LOADING: (state) => {
+    state.loading = false
   }
 }
 
 const actions = {
   login({ commit }, data) {
     return new Promise((resolve, reject) => {
-        githubLogin(data).then(response => {
-          if (response.code === 0) {
-            console.log('获取Token成功')
-            const { data } = response
-            commit('SET_ACCESS_TOKEN', data.access_token)
-            commit('SET_REFRESH_TOKEN', data.refresh_token)
-            setAccessToken(data.access_token)
-            setRefreshToken(data.refresh_token)
-            resolve()
-          }
-        }).catch(error => {
-          console.log('登录超时')
-          reject(error)
-        })
+      commit('OPEN_LOADING')
+      githubLogin(data).then(response => {
+        if (response.code === 0) {
+          commit('CLOSE_LOADING')
+          console.log('获取Token成功')
+          const { data } = response
+          commit('SET_ACCESS_TOKEN', data.access_token)
+          commit('SET_REFRESH_TOKEN', data.refresh_token)
+          setAccessToken(data.access_token)
+          setRefreshToken(data.refresh_token)
+          resolve()
+        }
+      }).catch(error => {
+        commit('CLOSE_LOADING')
+        console.log('登录超时')
+        reject(error)
+      })
     })
   },
 
   getInfo({ commit }) {
     return new Promise((resolve, reject, error) => {
+      commit('OPEN_LOADING')
       githubGetInfo().then(response => {
+        commit('CLOSE_LOADING')
         if (response.error === 500) {
           console.log('获取用户信息超时')
           reject(error)
@@ -59,6 +71,7 @@ const actions = {
         }
         resolve()
       }).catch(error => {
+        commit('CLOSE_LOADING')
         console.log('获取用户信息超时')
         reject(error)
       })

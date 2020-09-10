@@ -5,6 +5,7 @@ const getters = {
   githubUsername: state => state.githubUser.name,
   token: state => state.githubUser.token,
   refreshComment: state => state.comment.refreshComment,
+  loading: state => state.githubUser.loading,
 }
 
 export default getters
